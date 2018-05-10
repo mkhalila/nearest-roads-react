@@ -6,8 +6,9 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      roads: {}
+      roads: []
     }
+    this.displayRoads = this.displayRoads.bind(this);
   }
 
   componentDidMount() {
@@ -23,6 +24,14 @@ class App extends Component {
     })
   }
 
+  displayRoads() {
+    return this.state.roads.map(road => 
+      <li key={road.name + Math.random()}>
+        {JSON.stringify(road, null, 2)}
+      </li>
+    );
+  }
+
   render() {
     return (
       <div className="App">
@@ -33,7 +42,7 @@ class App extends Component {
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
-        <code>{ JSON.stringify(this.state.roads) }</code>
+        <ul>{this.displayRoads()}</ul>
       </div>
     );
   }

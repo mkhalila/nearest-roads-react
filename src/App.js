@@ -3,6 +3,26 @@ import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      roads: {}
+    }
+  }
+
+  componentDidMount() {
+    fetch('/test')
+    .then(response => {
+      return response.json();
+    })
+    .then(resRoads => {
+      this.setState({ roads: resRoads.roads })
+    })
+    .catch(err => {
+      console.error(err);
+    })
+  }
+
   render() {
     return (
       <div className="App">
@@ -13,6 +33,7 @@ class App extends Component {
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
+        <code>{ JSON.stringify(this.state.roads) }</code>
       </div>
     );
   }

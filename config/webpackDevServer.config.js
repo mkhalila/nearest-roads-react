@@ -92,8 +92,11 @@ module.exports = function(proxy, allowedHost) {
       // https://github.com/facebookincubator/create-react-app/issues/2272#issuecomment-302832432
       app.use(noopServiceWorkerMiddleware());
 
-      app.get('/test', (req, res) => {
-        nearestRoads.fromLocation(51.42, -0.148, 1000, (err, data) => {
+      app.get('/fromLocation', (req, res) => {
+        const lat = parseFloat(req.query.lat);
+        const lon = parseFloat(req.query.lon);
+        const distance = parseFloat(req.query.distance);
+        nearestRoads.fromLocation(lat, lon, distance, (err, data) => {
           if (err) console.error(err);
           return res.status(200).send({ roads: data })
         });

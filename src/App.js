@@ -11,7 +11,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    fetch('/test')
+    fetch('/fromLocation?lat=51.42&lon=-0.148&distance=1000')
     .then(response => {
       return response.json();
     })
